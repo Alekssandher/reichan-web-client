@@ -33,7 +33,10 @@ body {
     padding: 10px;
     border: 1px solid #b7c5d9;
 }
-
+.rules img {
+    max-width: 100%;
+    margin-bottom: 10px;
+}
 .rules h2 {
     color: #117743;
     margin-bottom: 10px;

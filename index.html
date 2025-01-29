@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,26 +21,26 @@
         </nav>
         
         <div class="post-form">
-            <input type="text" id="title" placeholder="Título">
-            <input type="file" id="imageUpload">
-            <textarea id="text" placeholder="Texto"></textarea>
+            <input type="text" id="title" placeholder="Title">
+            <input type="file" id="imageUpload" required>
+            <textarea id="text" placeholder="Text"></textarea>
             <select id="category">
                 <option value="games">Games</option>
                 <option value="anime">Anime</option>
-                <option value="others">Outros</option>
+                <option value="others">Others</option>
             </select>
-            <button onclick="uploadImage()">Criar Post</button>
+            <button onclick="uploadImage()">Create Post</button>
         </div>
 
         <div class="post-grid" id="postsContainer">
-            <div class="loading">Carregando posts...</div>
+            <div class="loading">Loading posts...</div>
         </div>
 
         <footer>
-            &copy; 2025 Reichan. Todos os direitos reservados. <br>
-            <a href="pages/rules.html">Regras</a> |
-            <a href="pages/contact.html">Contato</a> |
-            <a href="pages/support.html">Suporte</a>
+            &copy; 2025 Reichan. All rights reserved. <br>
+            <a href="pages/rules.html">Rules</a> |
+            <a href="pages/contact.html">Contact</a> |
+            <a href="pages/support.html">Support</a>
         </footer>
     </div>
 
@@ -48,4 +48,3 @@
 
 </body>
 </html>
-

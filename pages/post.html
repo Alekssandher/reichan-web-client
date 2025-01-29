@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,31 +7,45 @@
     <link rel="stylesheet" href="../css/post.css">
 </head>
 <body>
+    
     <div class="container">
-        <div class="header">
-            <a href="../index.html">Início</a>
-            <a href="#">Categoria 1</a>
-            <a href="#">Categoria 2</a>
-            <a href="#">Contato</a>
+        <div class="board-header">
+            <h1></h1>
         </div>
+        <nav class="nav">
+            <a href="../index.html">Home</a>
+            <a href="categoria.html?cat=games">Games</a>
+            <a href="categoria.html?cat=anime">Anime</a>
+            <a href="categoria.html?cat=tecnologia">Others</a>
+        </nav>
 
         <div class="post" id="postContainer">
-            <div class="loading">Carregando post...</div>
-        </div>
-        
-        <div id="repliesContainer">
-            <div class="loading">Carregando respostas...</div>
+            <div class="loading">Loading post...</div>
         </div>
 
-        <a href="index.html" class="back">← Voltar</a>
+        <div id="replyFormContainer">
+            <h3>Reply</h3>
+            <form id="replyForm">
+                <input type="text" id="replyName" placeholder="Anonymous">
+                <textarea id="replyText" placeholder="Write some text" required></textarea>
+                <input type="file" id="replyImage" accept="image/*, video/*, .gif">
+                <button type="submit">Submit</button>
+            </form>
+            <p id="replyAlert"></p>
+        </div>
+
+        <div id="repliesContainer">
+            <div class="loading">Loading replies...</div>
+        </div>
+
+        <a href="index.html" class="back">← Back</a>
         
         <div class="footer">
-            <p>&copy; 2025 Meu Site - Todos os direitos reservados.</p>
+            <p>&copy; 2025 My Website - All rights reserved.</p>
         </div>
     </div>
 
-    <script src="../javascript/post.js">  </script>    
-   
+    <script src="../javascript/post.js"></script>    
+
 </body>
 </html>
-

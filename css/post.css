@@ -19,12 +19,32 @@ body {
     padding: 1rem;
     border: 1px solid #b7c5d9;
 }
-
+.board-header {
+    background: #dd0000;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    margin-bottom: 1rem;
+}
 .header {
     text-align: center;
     margin-bottom: 1rem;
 }
+.nav {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    background: #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 0px;
+}
 
+.nav a {
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+}
 .header a {
     margin: 0 10px;
     text-decoration: none;
@@ -50,9 +70,57 @@ body {
     font-size: 12px;
     margin-bottom: 10px;
 }
+#repliesContainer {
+    margin-top: 20px; 
+}
+#replyFormContainer {
+    background: white;
+    padding: 15px;
+    border: 1px solid #b7c5d9;
+    margin-top: 20px;
+}
+
+#replyFormContainer h3 {
+    font-size: 16px;
+    color: #117743;
+    margin-bottom: 10px;
+}
+
+#replyForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#replyText {
+    width: 100%;
+    height: 80px;
+    padding: 10px;
+    border: 1px solid #b7c5d9;
+    resize: vertical;
+}
+
+#replyImage {
+    border: 1px solid #b7c5d9;
+    padding: 5px;
+}
+
+#replyForm button {
+    background: #117743;
+    color: white;
+    padding: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+#replyForm button:hover {
+    background: #0d5f36;
+}
 .reply {
     display: flex;
-    flex-direction: row; /* Layout padrão: imagem à esquerda e texto à direita */
+    flex-direction: row; 
     align-items: flex-start;
     gap: 10px;
     background: white;
@@ -63,7 +131,7 @@ body {
 }
 
 .reply.expanded {
-    flex-direction: column; /* Quando expandida, a imagem vai para cima */
+    flex-direction: column; 
 }
 
 .reply img {
@@ -75,7 +143,7 @@ body {
 }
 
 .reply img.enlarged {
-    max-width: 100%; /* A imagem expande para o tamanho real */
+    max-width: 100%; 
 }
 
 .reply-body-container {
@@ -84,7 +152,7 @@ body {
 }
 
 .reply img {
-    max-width: 100px; /* Ajuste conforme necessário */
+    max-width: 100px;
     height: auto;
     cursor: pointer;
     transition: transform 0.3s ease-in-out;
@@ -92,7 +160,7 @@ body {
 }
 
 .reply .reply-body-container {
-    flex: 1; /* Faz o texto ocupar o espaço restante */
+    flex: 1; 
 }
 
 .reply-body {

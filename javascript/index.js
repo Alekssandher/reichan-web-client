@@ -1,4 +1,5 @@
 async function fetchPosts() {
+    
     try {
         const response = await fetch('https://reichan-api.onrender.com/api/posts/findAll');
         const posts = await response.json();
@@ -17,7 +18,8 @@ function displayPosts(posts) {
     posts.forEach((post, index) => {
         const postElement = document.createElement('div');
         postElement.className = 'post';
-        postElement.onclick = () => window.location.href = `pages/post.html?id=${post.id}`;
+        // Agora, passamos a categoria na URL, além do ID
+        postElement.onclick = () => window.location.href = `pages/post.html?id=${post.id}&category=${post.category}`;
         
         let mediaElement = '';
         const fileExtension = post.image.split('.').pop().toLowerCase();
@@ -41,6 +43,7 @@ function displayPosts(posts) {
         postsContainer.appendChild(postElement);
     });
 }
+
 async function uploadImage() {
     const category = document.getElementById('category').value;
     const file = document.getElementById('imageUpload').files[0];
@@ -80,11 +83,11 @@ if (!response.ok) {
     throw new Error(`Erro ${response.status}: ${response.statusText}`);
 }
 
-alert("Post criado com sucesso!");
+alert("Post created!");
 fetchPosts();
 } catch (error) {
-console.error("Erro ao criar post:", error);
-alert("Falha ao criar o post.");
+console.error("Eror creating post:", error);
+alert("Fail to create post, did you select an image or a video?.");
 }
 }
 window.addEventListener('load', fetchPosts);

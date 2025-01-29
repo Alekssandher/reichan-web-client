@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reichan</title>
+    <link rel="stylesheet" href="css/index.css">
+        
+</head>
+<body>
+    <div class="container">
+        <div class="board-header">
+            <h1>Reichan</h1>
+        </div>
+
+        <nav class="nav">
+            <a href="home.html">Home</a>
+            <a href="categoria.html?cat=games">Games</a>
+            <a href="categoria.html?cat=anime">Anime</a>
+            <a href="categoria.html?cat=tecnologia">Others</a>
+        </nav>
+        
+        <div class="post-form">
+            <input type="text" id="title" placeholder="Título">
+            <input type="file" id="imageUpload">
+            <textarea id="text" placeholder="Texto"></textarea>
+            <select id="category">
+                <option value="games">Games</option>
+                <option value="anime">Anime</option>
+                <option value="others">Outros</option>
+            </select>
+            <button onclick="uploadImage()">Criar Post</button>
+        </div>
+
+        <div class="post-grid" id="postsContainer">
+            <div class="loading">Carregando posts...</div>
+        </div>
+
+        <footer>
+            &copy; 2025 Reichan. Todos os direitos reservados. <br>
+            <a href="pages/rules.html">Regras</a> |
+            <a href="pages/contact.html">Contato</a> |
+            <a href="pages/support.html">Suporte</a>
+        </footer>
+    </div>
+
+    <script src="javascript/index.js"></script>
+
+</body>
+</html>
+

@@ -1,0 +1,139 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: monospace;
+    font-size: 14px;
+}
+
+body {
+    background-color: #eef2ff;
+    padding: 1rem;
+    color: #000;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #f9f9f9;
+    padding: 1rem;
+    border: 1px solid #b7c5d9;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.header a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #117743;
+    font-weight: bold;
+}
+
+.post, .reply {
+    background: white;
+    border: 1px solid #b7c5d9;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.post-header {
+    color: #117743;
+    margin-bottom: 5px;
+    font-size: 18px;
+}
+
+.post-date, .reply-date {
+    color: #666;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+.reply {
+    display: flex;
+    flex-direction: row; /* Layout padrão: imagem à esquerda e texto à direita */
+    align-items: flex-start;
+    gap: 10px;
+    background: white;
+    border: 1px solid #b7c5d9;
+    padding: 10px;
+    margin-bottom: 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+.reply.expanded {
+    flex-direction: column; /* Quando expandida, a imagem vai para cima */
+}
+
+.reply img {
+    max-width: 100px;
+    height: auto;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    border: 1px solid #d0d0e0;
+}
+
+.reply img.enlarged {
+    max-width: 100%; /* A imagem expande para o tamanho real */
+}
+
+.reply-body-container {
+    flex: 1;
+    transition: all 0.3s ease-in-out;
+}
+
+.reply img {
+    max-width: 100px; /* Ajuste conforme necessário */
+    height: auto;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+    border: 1px solid #d0d0e0;
+}
+
+.reply .reply-body-container {
+    flex: 1; /* Faz o texto ocupar o espaço restante */
+}
+
+.reply-body {
+    color: #333;
+    line-height: 1.5;
+    word-wrap: break-word;
+}
+
+.post-image {
+    max-width: 100%;
+    height: auto;
+    margin: 15px 0;
+    border: 1px solid #d0d0e0;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.post-body, .reply-body {
+    color: #333;
+    line-height: 1.5;
+    word-wrap: break-word;
+}
+
+.back {
+    display: block;
+    margin-top: 20px;
+    text-align: center;
+    text-decoration: none;
+    color: #dd0000;
+    font-weight: bold;
+}
+
+.loading {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px;
+    background: #d0d0e0;
+}

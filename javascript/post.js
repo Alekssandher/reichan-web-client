@@ -8,7 +8,7 @@ async function fetchPost() {
     const postId = urlParams.get('id');
 
     if (!postId) {
-        document.getElementById('postContainer').innerHTML = '<div class="loading">Post não encontrado.</div>';
+        document.getElementById('postContainer').innerHTML = '<div class="loading">Post not found.</div>';
         return;
     }
 
@@ -19,14 +19,14 @@ async function fetchPost() {
         
         document.getElementById('postContainer').innerHTML = `
             <div class="post-header"><strong>${post.title}</strong></div>
-            <div class="post-date">Publicado em: ${new Date(post.createdAt).toLocaleString('pt-BR')}</div>
-            <img src="https://reichan-api.onrender.com/api/images/get/${post.category}/${post.image}" alt="Imagem do post" class="post-image" onclick="toggleImageSize(this)">
+            <div class="post-date">Published on: ${new Date(post.createdAt).toLocaleString('en-US')}</div>
+            <img src="https://reichan-api.onrender.com/api/images/get/${post.category}/${post.image}" alt="Post image" class="post-image" onclick="toggleImageSize(this)">
             <div class="post-body">${post.text}</div>
         `;
         fetchReplies(postId);
     } catch (error) {
-        console.error('Erro ao buscar post:', error);
-        document.getElementById('postContainer').innerHTML = '<div class="loading">Erro ao carregar post.</div>';
+        console.error('Error fetching post:', error);
+        document.getElementById('postContainer').innerHTML = '<div class="loading">Error loading post.</div>';
     }
 }
 
@@ -38,7 +38,7 @@ async function fetchReplies(postId) {
         const container = document.getElementById('repliesContainer');
         
         if (replies.length === 0) {
-            container.innerHTML = '<div class="loading">Nenhuma resposta encontrada.</div>';
+            container.innerHTML = '<div class="loading">No replies found.</div>';
             return;
         }
 
@@ -47,14 +47,14 @@ async function fetchReplies(postId) {
                 ${reply.image ? `<img src="https://reichan-api.onrender.com/api/images/get/${reply.category}/${reply.image}" 
                 alt="${reply.image}" class="reply-image" onclick="toggleReplyImageSize(this)">` : ''}
                 <div class="reply-body-container">
-                    <div class="reply-date">Respondido por: ${reply.author} em ${new Date(reply.createdAt).toLocaleString('pt-BR')}</div>
+                    <div class="reply-date">Replied by: ${reply.author} on ${new Date(reply.createdAt).toLocaleString('en-US')}</div>
                     <div class="reply-body">${reply.text}</div>
                 </div>
             </div>
         `).join('');
     } catch (error) {
-        console.error('Erro ao buscar respostas:', error);
-        document.getElementById('repliesContainer').innerHTML = '<div class="loading">Erro ao carregar respostas.</div>';
+        console.error('Error fetching replies:', error);
+        document.getElementById('repliesContainer').innerHTML = '<div class="loading">Error loading replies.</div>';
     }
 }
 
@@ -85,7 +85,7 @@ document.getElementById('replyForm').addEventListener('submit', async (e) => {
     const repliesContainer = document.getElementById('replyAlert');
 
     if (!text) {
-        repliesContainer.innerHTML = '<p style="color: red;">Preencha todos os campos obrigatórios.</p>';
+        repliesContainer.innerHTML = '<p style="color: red;">Please fill in all required fields.</p>';
         return;
     }
 
@@ -98,13 +98,12 @@ document.getElementById('replyForm').addEventListener('submit', async (e) => {
         const postData = await postResponse.json();
         category = postData.post.category;
     } catch (error) {
-        console.error('Erro ao buscar categoria do post:', error);
-        repliesContainer.innerHTML = '<p style="color: red;">Erro ao carregar dados do post.</p>';
+        console.error('Error fetching post category:', error);
+        repliesContainer.innerHTML = '<p style="color: red;">Error loading post data.</p>';
         return;
     }
 
     let fileName = ''; 
-
 
     if (imageInput.files[0]) {
         const formData = new FormData();
@@ -121,12 +120,12 @@ document.getElementById('replyForm').addEventListener('submit', async (e) => {
             if (response.ok) {
                 fileName = result.fileName; 
             } else {
-                repliesContainer.innerHTML = `<p style="color: red;">Erro ao enviar imagem: ${result.message}</p>`;
+                repliesContainer.innerHTML = `<p style="color: red;">Error uploading image: ${result.message}</p>`;
                 return;
             }
         } catch (error) {
-            console.error('Erro ao enviar imagem:', error);
-            repliesContainer.innerHTML = '<p style="color: red;">Erro ao enviar imagem. Tente novamente.</p>';
+            console.error('Error uploading image:', error);
+            repliesContainer.innerHTML = '<p style="color: red;">Error uploading image. Please try again.</p>';
             return;
         }
     }
@@ -136,8 +135,8 @@ document.getElementById('replyForm').addEventListener('submit', async (e) => {
 
         document.getElementById('replyForm').reset();
     } catch (error) {
-        console.error('Erro ao enviar resposta:', error);
-        repliesContainer.innerHTML = `<p style="color: red;">Erro ao enviar resposta: ${error.message}</p>`;
+        console.error('Error submitting reply:', error);
+        repliesContainer.innerHTML = `<p style="color: red;">Error submitting reply: ${error.message}</p>`;
     }
 });
 
@@ -156,7 +155,6 @@ async function createReply(postId, author, text, fileName, category, repliesCont
             })
         });
 
-        
         const contentType = response.headers.get('content-type');
         let result;
 
@@ -169,21 +167,21 @@ async function createReply(postId, author, text, fileName, category, repliesCont
         if (response.ok) {
             repliesContainer.innerHTML = `
                 <p style="color: green;">
-                    Resposta enviada com sucesso!<br>
-                    ${fileName ? `Arquivo: ${fileName}<br>` : ''}
-                    Nome: ${author}
+                    Reply submitted successfully!<br>
+                    ${fileName ? `File: ${fileName}<br>` : ''}
+                    Name: ${author}
                 </p>
             `;
 
             fetchReplies(postId);
             return result;
         } else {
-            console.error('Erro ao criar resposta:', result);
+            console.error('Error creating reply:', result);
             throw new Error(result.message || result); 
         }
     } catch (error) {
-        console.error('Erro na comunicação com o servidor:', error);
-        repliesContainer.innerHTML = `<p style="color: red;">Erro ao enviar resposta: ${error.message}</p>`;
+        console.error('Error with server communication:', error);
+        repliesContainer.innerHTML = `<p style="color: red;">Error submitting reply: ${error.message}</p>`;
         throw error; 
     }
 }

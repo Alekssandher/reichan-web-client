@@ -48,17 +48,59 @@ function displayPosts(posts) {
 async function uploadImage() {
     const category = document.getElementById('category').value;
     const file = document.getElementById('imageUpload').files[0];
+    const captchaCode = document.getElementById('captchaCode').value.trim();  // Obtendo o código do captcha
+
+    // Verificando se o código do captcha foi fornecido
+    if (!captchaCode) {
+        alert("Digite o código do captcha!");
+        return;
+    }
+
     const formData = new FormData();
     formData.append('file', file);
-    
-    const response = await fetch(`https://reichan-api.onrender.com/api/images/upload?category=${encodeURIComponent(category)}`, {
-        method: 'POST',
-        body: formData
-    });
-    
-    const data = await response.json();
-    createPost(data.fileName);
+
+    try {
+        const response = await fetch(`https://reichan-api.onrender.com/api/images/upload?category=${encodeURIComponent(category)}`, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CaptchaCode': captchaCode  // Enviando o código do captcha no header
+            }
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            if (response.status === 429) {  // Código de status para "Too Many Requests"
+                const retryAfter = data.retryAfter || 300;  // 300 segundos (5 minutos) padrão
+                alert(`Você excedeu o limite de envio. Tente novamente em ${retryAfter / 60} minutos.`);
+                startCooldownTimer(retryAfter);  // Inicia o timer de contagem regressiva
+                return;
+            }
+            throw new Error(data.message || "Erro ao fazer o upload da imagem.");
+        }
+
+        createPost(data.fileName);  // Chama a função para criar o post
+
+    } catch (error) {
+        console.error('Erro ao enviar imagem:', error);
+        alert("Erro ao enviar a imagem. Tente novamente.");
+    }
 }
+
+// Função para iniciar o timer de cooldown (5 minutos)
+function startCooldownTimer(seconds) {
+    const cooldownMessage = document.createElement('div');
+    cooldownMessage.id = 'cooldownMessage';
+    cooldownMessage.textContent = `Aguarde ${seconds / 60} minutos antes de tentar novamente.`;
+
+    document.body.appendChild(cooldownMessage);
+
+    setTimeout(() => {
+        document.getElementById('cooldownMessage').remove();  // Remove a mensagem após o tempo de cooldown
+    }, seconds * 1000);  // Tempo em milissegundos
+}
+
 
 async function createPost(imageName) {
     const post = {

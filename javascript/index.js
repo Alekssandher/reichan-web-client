@@ -101,6 +101,22 @@ function startCooldownTimer(seconds) {
     }, seconds * 1000);  // Tempo em milissegundos
 }
 
+// Função para alternar o tamanho da imagem do CAPTCHA
+function toggleCaptchaSize() {
+    const captchaImage = document.getElementById('captchaImage');
+
+    // Se a imagem estiver no tamanho grande, voltamos para o tamanho normal
+    if (captchaImage.style.width === '100%') {
+        captchaImage.style.width = '200px';  // Tamanho original
+        captchaImage.style.height = 'auto';  // Altura automática
+    } else {
+        // Caso contrário, ampliamos para 90% da largura da tela
+        captchaImage.style.width = '100%';
+        captchaImage.style.height = 'auto';  // Mantém a proporção
+    }
+}
+
+
 
 async function createPost(imageName) {
     const post = {
